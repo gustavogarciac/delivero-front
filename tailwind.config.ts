@@ -13,7 +13,7 @@ const config: Config = {
         theme: {
           green: {
             DEFAULT: '#66a182',
-            foreground: '#b2e1a3',
+            foreground: '#caffb9ff',
           },
           crayola: '#ef2d56ff',
           light: '#eee5e9ff',
@@ -31,7 +31,7 @@ const config: Config = {
         },
         primary: {
           DEFAULT: '#66a182',
-          foreground: '#b2e1a3',
+          foreground: '#caffb9ff',
         },
         secondary: {
           DEFAULT: '#ef2d56ff',
@@ -39,7 +39,7 @@ const config: Config = {
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          foreground: '#DED5D9',
         },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
@@ -49,7 +49,7 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
-        border: 'hsl(var(--border))',
+        border: '#B3ABAF',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         chart: {
@@ -59,6 +59,9 @@ const config: Config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+      },
+      fontFamily: {
+        sans: ['var(--font-montserrat), sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',
