@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -16,17 +17,22 @@ export function HeroImageGallery() {
   }
 
   return (
-    <div className="bg-muted-foreground/20 flex min-h-20 w-fit gap-2 overflow-hidden rounded-xl">
+    <motion.div
+      initial={{ x: -20, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.8 }}
+      className="flex min-h-20 w-fit gap-2 overflow-hidden rounded-xl bg-muted-foreground/20"
+    >
       <div className="flex flex-col border-r">
         <button
           onClick={handleNext}
-          className="hover:bg-muted-foreground/30 h-full px-3 py-2"
+          className="h-full px-3 py-2 hover:bg-muted-foreground/30"
         >
           <ArrowRightIcon className="size-5 shrink-0" />
         </button>
         <button
           onClick={handlePrev}
-          className="hover:bg-muted-foreground/30 h-full border-t px-3 py-2"
+          className="h-full border-t px-3 py-2 hover:bg-muted-foreground/30"
         >
           <ArrowLeftIcon className="size-5 shrink-0" />
         </button>
@@ -48,6 +54,6 @@ export function HeroImageGallery() {
           className="rounded-xl"
         />
       </div>
-    </div>
+    </motion.div>
   )
 }
