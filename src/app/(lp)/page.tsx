@@ -1,3 +1,4 @@
+import { E2ELogisticsSection } from './_components/e2e-logistics'
 import { Header } from './_components/header'
 import { Hero } from './_components/hero'
 import { LogisticsSimplified } from './_components/logistics-simplified'
@@ -15,6 +16,8 @@ export default function Page() {
       </section>
       <section className="relative mx-auto mt-10 flex w-full max-w-6xl flex-col overflow-hidden rounded-xl p-3 text-theme-dark">
         <LogisticsSimplified />
+
+        <E2ELogisticsSection />
       </section>
     </main>
   )
