@@ -15,7 +15,7 @@ export function HeroInfoGallery() {
       initial={{ x: 20, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.8 }}
-      className="flex min-h-80 w-full max-w-64 flex-col gap-2 rounded-xl bg-primary-foreground/20 shadow-inner ring-2 ring-primary"
+      className="hidden min-h-80 w-full max-w-64 flex-col gap-2 rounded-xl bg-primary-foreground/20 shadow-inner ring-2 ring-primary md:flex"
     >
       <div className="flex flex-row justify-between p-2">
         <div className="grid size-8 items-center justify-center rounded-full bg-muted ring-2 ring-primary">

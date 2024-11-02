@@ -1,34 +1,18 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
+import { MobileMenu } from './mobile-menu'
+
 export function Header() {
-  const [scroll, setScroll] = useState(0)
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setScroll(window.scrollY)
-  //   }
-
-  //   if (typeof window === 'undefined') return
-
-  //   window.addEventListener('scroll', handleScroll)
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll)
-  //   }
-  // })
-
   return (
     <>
       <motion.header
         className={cn(
           'flex w-full flex-row items-center justify-between rounded-xl border border-border/20 p-4 shadow-sm',
-          scroll > 500 && 'hidden',
         )}
         initial={{ y: -200, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -40,7 +24,8 @@ export function Header() {
         }}
       >
         <span className="text-2xl font-bold">DELIVERO</span>
-        <nav>
+
+        <nav className="hidden md:block">
           <ul className="flex flex-row items-center gap-4">
             <motion.li
               whileHover={{ scale: 1.05 }}
@@ -75,10 +60,12 @@ export function Header() {
           </ul>
         </nav>
 
-        <Button>Get Started</Button>
+        <Button className="hidden md:block">Get Started</Button>
+
+        <MobileMenu />
       </motion.header>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {scroll > 500 && (
           <motion.header
             initial={{ opacity: 0 }}
@@ -128,7 +115,7 @@ export function Header() {
             </Button>
           </motion.header>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </>
   )
 }
