@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -8,6 +9,8 @@ import { cn } from '@/lib/utils'
 import { MobileMenu } from './mobile-menu'
 
 export function Header() {
+  const router = useRouter()
+
   return (
     <>
       <motion.header
@@ -60,7 +63,12 @@ export function Header() {
           </ul>
         </nav>
 
-        <Button className="hidden md:block">Get Started</Button>
+        <Button
+          className="hidden md:block"
+          onClick={() => router.push('/auth/sign-in')}
+        >
+          Get Started
+        </Button>
 
         <MobileMenu />
       </motion.header>

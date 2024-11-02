@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight, BoxIcon, Container, StarIcon } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export function LogisticsSimplified() {
+  const router = useRouter()
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -26,6 +29,7 @@ export function LogisticsSimplified() {
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.5, delay: 1 }}
         className="flex items-center justify-center gap-2 rounded-full border px-2 py-1"
+        onClick={() => router.push('/auth/sign-in')}
       >
         Get Started!{' '}
         <ArrowUpRight className="size-5 rounded-full bg-theme-green text-theme-light" />
