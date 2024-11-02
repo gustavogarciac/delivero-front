@@ -10,7 +10,7 @@ import { LogisticsSimplified } from './_components/logistics-simplified'
 
 export default function Page() {
   return (
-    <main className="flex flex-col gap-2 p-3">
+    <main className="mx-auto flex max-w-6xl flex-col gap-2 bg-theme-light p-3">
       <section className="relative mx-auto flex min-h-[40rem] w-full max-w-6xl flex-col overflow-hidden rounded-xl bg-theme-dark bg-[url('/bg-hero.webp')] bg-right p-3 text-muted">
         <div className="absolute inset-0 bg-theme-dark/90" />
         <div className="relative z-50 flex flex-1 flex-col">
@@ -19,6 +19,7 @@ export default function Page() {
           <Hero />
         </div>
       </section>
+
       <section className="relative mx-auto mt-10 flex w-full max-w-6xl flex-col overflow-hidden rounded-xl p-3 text-theme-dark">
         <LogisticsSimplified />
 

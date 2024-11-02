@@ -31,7 +31,7 @@ export function LogisticsSimplified() {
         <ArrowUpRight className="size-5 rounded-full bg-theme-green text-theme-light" />
       </motion.button>
 
-      <div className="relative flex w-full flex-col overflow-hidden rounded-t-xl md:flex-row">
+      <div className="relative flex w-full flex-col overflow-hidden rounded-t-xl md:flex-row md:rounded-xl">
         {/* Apply filter to all images */}
         <div className="absolute right-0 top-0 h-full w-[900px] rounded-xl bg-theme-dark/40" />
 
