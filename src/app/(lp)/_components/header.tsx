@@ -9,19 +9,19 @@ import { cn } from '@/lib/utils'
 export function Header() {
   const [scroll, setScroll] = useState(0)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScroll(window.scrollY)
-    }
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScroll(window.scrollY)
+  //   }
 
-    if (typeof window === 'undefined') return
+  //   if (typeof window === 'undefined') return
 
-    window.addEventListener('scroll', handleScroll)
+  //   window.addEventListener('scroll', handleScroll)
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  })
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll)
+  //   }
+  // })
 
   return (
     <>

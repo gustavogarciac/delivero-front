@@ -31,13 +31,13 @@ export function LogisticsSimplified() {
         <ArrowUpRight className="size-5 rounded-full bg-theme-green text-theme-light" />
       </motion.button>
 
-      <div className="relative flex overflow-hidden rounded-xl">
+      <div className="relative flex w-full overflow-hidden rounded-xl">
         <Image
           src={'/logistics/logistics-4.jpg'}
           width={900}
           height={400}
           alt="Logistics"
-          className="aspect-video max-h-96 rounded-xl object-cover"
+          className="aspect-video max-h-96 w-full rounded-xl object-cover"
         />
 
         <div className="absolute right-0 top-0 h-full w-[900px] bg-theme-dark/40" />
