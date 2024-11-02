@@ -30,18 +30,18 @@ export function Counter({ current, setCurrent }: CounterProps) {
       <Button
         variant={'ghost'}
         size="xs"
-        className="bg-muted/40 group rounded-full px-2 py-0"
+        className="group rounded-full bg-muted/40 px-2 py-0"
         onClick={handlePrev}
       >
-        <ChevronLeft className="group-hover:text-primary size-8 text-white" />
+        <ChevronLeft className="size-8 text-white group-hover:text-primary" />
       </Button>
       <Button
         variant={'ghost'}
         size="xs"
-        className="bg-muted/40 group rounded-full px-2 py-0"
+        className="group rounded-full bg-muted/40 px-2 py-0"
         onClick={handleNext}
       >
-        <ChevronRight className="group-hover:text-primary size-8 text-white" />
+        <ChevronRight className="size-8 text-white group-hover:text-primary" />
       </Button>
     </div>
   )
