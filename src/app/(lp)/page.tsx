@@ -1,4 +1,5 @@
 import { E2ELogisticsSection } from './_components/e2e-logistics'
+import { Footer } from './_components/footer'
 import { Header } from './_components/header'
 import { Hero } from './_components/hero'
 import { HowWeShip } from './_components/how-we-ship'
@@ -23,7 +24,7 @@ export default function Page() {
         <HowWeShip />
       </section>
 
-      {/* <Footer /> */}
+      <Footer />
     </main>
   )
 }

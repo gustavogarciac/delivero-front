@@ -9,7 +9,7 @@ export function E2ELogisticsSection() {
       <motion.img
         initial={{ x: 20, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        transition={{ duration: 0.5, delay: 0 }}
         src="/logistics/logistics-5.jpg"
         alt="End-to-end logistics"
         width={400}
@@ -21,7 +21,7 @@ export function E2ELogisticsSection() {
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="flex flex-col gap-2"
         >
           <h1 className="text-center text-4xl font-bold text-theme-dark md:text-end">
@@ -36,7 +36,7 @@ export function E2ELogisticsSection() {
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2"
         >
           <div className="flex min-h-64 flex-col justify-between rounded-xl bg-theme-dark bg-[url('/patterns/bg.png')] bg-center p-5">
