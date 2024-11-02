@@ -11,7 +11,7 @@ import {
 
 export function FAQ() {
   return (
-    <motion.div className="mt-20 flex flex-col items-start justify-center gap-10 md:flex-row">
+    <motion.div className="mt-32 flex flex-col items-start justify-center gap-10 md:flex-row">
       <motion.h1
         initial={{ x: -20, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}

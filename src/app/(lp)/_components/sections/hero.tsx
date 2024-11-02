@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion'
 
-import { HeroImageGallery } from './hero-image-gallery'
-import { HeroInfoGallery } from './hero-info-gallery'
+import { HeroImageGallery } from '../hero-image-gallery'
+import { HeroInfoGallery } from '../hero-info-gallery'
 
 export function Hero() {
   return (

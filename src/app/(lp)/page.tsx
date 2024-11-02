@@ -1,12 +1,12 @@
-import { AutomateSection } from './_components/automate'
-import { E2ELogisticsSection } from './_components/e2e-logistics'
-import { FAQ } from './_components/faq'
+import { AutomateSection } from './_components/sections/automate'
+import { E2ELogisticsSection } from './_components/sections/e2e-logistics'
+import { FAQ } from './_components/sections/faq'
 import { Footer } from './_components/footer'
-import { FourCardsSection } from './_components/four-cards'
+import { FourCardsSection } from './_components/sections/four-cards'
 import { Header } from './_components/header'
-import { Hero } from './_components/hero'
-import { HowWeShip } from './_components/how-we-ship'
-import { LogisticsSimplified } from './_components/logistics-simplified'
+import { Hero } from './_components/sections/hero'
+import { HowWeShip } from './_components/sections/how-we-ship'
+import { LogisticsSimplified } from './_components/sections/logistics-simplified'
 
 export default function Page() {
   return (

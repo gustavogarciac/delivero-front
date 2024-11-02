@@ -12,7 +12,7 @@ import { footerLinks } from './footer-links'
 
 export function Footer() {
   return (
-    <footer className="flex flex-col gap-20 overflow-hidden rounded-b-xl bg-theme-dark p-5 pb-10 text-theme-light md:pb-5">
+    <footer className="mt-20 flex flex-col gap-20 overflow-hidden rounded-b-xl bg-theme-dark p-5 pb-10 text-theme-light md:pb-5">
       <div className="pointer-events-none absolute inset-x-0 flex flex-row items-center justify-center overflow-hidden">
         <span className="mx-auto bg-gradient-to-b from-theme-light/[10%] to-theme-light/[0%] bg-clip-text text-[4rem] font-black text-transparent sm:text-[8rem] sm:leading-[8rem] md:text-[12rem] md:leading-[8rem]">
           DELIVERO
