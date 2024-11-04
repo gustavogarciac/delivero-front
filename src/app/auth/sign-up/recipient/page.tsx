@@ -1,32 +1,28 @@
-'use client'
 
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-import { useAuthStore } from '../../stores/deliverer-auth-store'
+import { SignUpRecipientForm } from './_components/form'
+import { FormProgress } from './_components/form-progress'
 
 export default function SignUpRecipient() {
-  const { initialInfo, finishedInitialStep } = useAuthStore()
-
-  const { push } = useRouter()
-
-  useEffect(() => {
-    if (!finishedInitialStep || initialInfo.role !== 'recipient') {
-      push('/auth/sign-up')
-    }
-  }, [finishedInitialStep, initialInfo.role, push])
-
-  // Retorna null se as condições de navegação não forem atendidas
-  if (!finishedInitialStep || initialInfo.role !== 'recipient') {
-    return null
-  }
-
   return (
-    <div className="flex flex-col gap-5 p-10">
-      <span>{initialInfo.name}</span>
-      <span>{initialInfo.email}</span>
-      <span>{initialInfo.password}</span>
-      <span>{initialInfo.role}</span>
+    <div className="flex h-full flex-col overflow-y-auto p-4 gap-5">
+      <h1 className="ml-auto text-3xl font-bold uppercase text-black">
+        Delivero
+      </h1>
+
+      <div className="flex flex-1 flex-col items-center justify-center">
+        <div className="flex w-full flex-col gap-px px-4">
+          <h2 className="text-left text-2xl font-bold text-theme-dark">
+            Sign Up as a Recipient
+          </h2>
+          <p className="text-sm">
+            Please, fill in the form below to create your account, so you can start receiving packages. If you already have an order, please sign in with the credentials sent to your email.
+          </p>
+        </div>
+
+        <FormProgress />
+
+        <SignUpRecipientForm />
+      </div>
     </div>
   )
 }

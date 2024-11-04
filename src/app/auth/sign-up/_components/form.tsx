@@ -22,7 +22,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
-import { useAuthStore } from '../../stores/deliverer-auth-store'
+import { useAuthStore } from '../../stores/auth-store'
 
 const signUpSchema = z
   .object({
