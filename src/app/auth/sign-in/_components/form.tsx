@@ -17,7 +17,7 @@ const signInSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
   password: z
     .string({ message: 'Password must not be empty.' })
-    .min(6, { message: 'Password must be at least 6 characters long.' }),
+    .min(6, { message: 'Password must contain at least 6 characters.' }),
   rememberMe: z.boolean().optional(),
 })
 
