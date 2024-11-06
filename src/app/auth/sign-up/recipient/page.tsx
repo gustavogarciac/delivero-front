@@ -1,10 +1,9 @@
-
 import { SignUpRecipientForm } from './_components/form'
 import { FormProgress } from './_components/form-progress'
 
 export default function SignUpRecipient() {
   return (
-    <div className="flex h-full flex-col overflow-y-auto p-4 gap-5">
+    <div className="flex h-full flex-col gap-5 overflow-y-auto p-4">
       <h1 className="ml-auto text-3xl font-bold uppercase text-black">
         Delivero
       </h1>
@@ -15,7 +14,9 @@ export default function SignUpRecipient() {
             Sign Up as a Recipient
           </h2>
           <p className="text-sm">
-            Please, fill in the form below to create your account, so you can start receiving packages. If you already have an order, please sign in with the credentials sent to your email.
+            Please, fill in the form below to create your account, so you can
+            start receiving packages. If you already have an order, please sign
+            in with the credentials sent to your email.
           </p>
         </div>
 

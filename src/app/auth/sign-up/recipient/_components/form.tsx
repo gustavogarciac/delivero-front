@@ -4,14 +4,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import IMask from 'imask'
 import {
   Building,
-  Building2Icon, CalendarIcon, GlobeIcon, PhoneIcon, TriangleAlert,
-  UserIcon
+  Building2Icon,
+  CalendarIcon,
+  GlobeIcon,
+  PhoneIcon,
+  TriangleAlert,
+  UserIcon,
 } from 'lucide-react'
+import { redirect } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ReactFlagsSelect from 'react-flags-select'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { useAuthStore } from '@/app/auth/stores/auth-store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -19,28 +25,31 @@ import { Label } from '@/components/ui/label'
 // import { useAuthStore } from '@/app/auth/stores/auth-store'
 
 const signUpRecipientSchema = z.object({
-  address: z.string().min(1, { message: "You must inform your address!"}),
-  city: z.string().min(3, { message: "You must inform your city!"}),
-  state: z.string().min(2, { message: "You must inform your state!"}),
+  address: z.string().min(1, { message: 'You must inform your address!' }),
+  city: z.string().min(3, { message: 'You must inform your city!' }),
+  state: z.string().min(2, { message: 'You must inform your state!' }),
   country: z.string(),
-  phone: z.string().min(10, { message: "You must provide a phone number!"}),
-  fullName: z.string().min(3, { message: "You must inform your full name!"}),
-  birthDate: z.date({ message: "You must inform your birthday."}).refine((date) => {
-    const now = new Date()
-    const diff = now.getFullYear() - date.getFullYear()
-    return diff >= 18
-  }, { message: "You must be at least 18 years old to sign up."})
+  phone: z.string().min(10, { message: 'You must provide a phone number!' }),
+  fullName: z.string().min(3, { message: 'You must inform your full name!' }),
+  birthDate: z.date({ message: 'You must inform your birthday.' }).refine(
+    (date) => {
+      const now = new Date()
+      const diff = now.getFullYear() - date.getFullYear()
+      return diff >= 18
+    },
+    { message: 'You must be at least 18 years old to sign up.' },
+  ),
 })
 type SignUpFormSchema = z.infer<typeof signUpRecipientSchema>
 
 export function SignUpRecipientForm() {
-  // const { initialInfo, finishedInitialStep } = useAuthStore()
+  const { initialInfo, finishedInitialStep } = useAuthStore()
 
-  // if(!finishedInitialStep) redirect('/auth/sign-up')
+  if (!finishedInitialStep) redirect('/auth/sign-up')
 
-  // if(!initialInfo) redirect('/auth/sign-up')
+  if (!initialInfo) redirect('/auth/sign-up')
 
-  // if(initialInfo.role !== 'recipient') redirect('/auth/sign-up')
+  if (initialInfo.role !== 'recipient') redirect('/auth/sign-up')
 
   const {
     formState: { isSubmitting, errors },
@@ -60,7 +69,6 @@ export function SignUpRecipientForm() {
   })
 
   const [country, setCountry] = useState('US')
-  const [hasVehicle, setHasVehicle] = useState(false)
   const phoneRef = useRef<HTMLInputElement | null>(null)
 
   const onSubmit = (data: SignUpFormSchema) => {

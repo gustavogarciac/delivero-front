@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { LockIcon, MailIcon, TriangleAlert } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -133,6 +134,7 @@ export function SignInForm() {
         <Button
           variant={'ghost'}
           type="button"
+          onClick={() => redirect('http://localhost:3333/auth/google')}
           className="border border-border/40 bg-zinc-100 hover:bg-zinc-50 hover:outline"
         >
           <Image

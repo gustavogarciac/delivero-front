@@ -6,13 +6,15 @@ interface AuthStore {
   initialInfo: {
     name: string
     email: string
-    password: string
+    password: string | null
+    picture?: string | null
     role: string
   }
   setInitialInfo: (initialInfo: {
     name: string
     email: string
-    password: string
+    password: string | null
+    picture?: string | null
     role: string
   }) => void
 }
@@ -25,6 +27,7 @@ export const useAuthStore = create<AuthStore>((set) => {
     initialInfo: {
       name: '',
       email: '',
+      picture: null,
       password: '',
       role: 'deliverer',
     },
