@@ -15,12 +15,14 @@ import { redirect } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import ReactFlagsSelect from 'react-flags-select'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { useAuthStore } from '@/app/auth/stores/auth-store'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { signUpDeliverer } from '@/http/sign-up-deliverer'
 import { cn } from '@/lib/utils'
 
 const signUpDelivererSchema = z.object({
@@ -28,7 +30,7 @@ const signUpDelivererSchema = z.object({
   city: z.string().min(3, { message: 'You must inform your city!' }),
   country: z.string(),
   phone: z.string().min(10, { message: 'You must provide a phone number!' }),
-  birthdate: z.date().refine(
+  birthdate: z.coerce.date().refine(
     (date) => {
       const now = new Date()
       const diff = now.getFullYear() - date.getFullYear()
@@ -41,9 +43,12 @@ const signUpDelivererSchema = z.object({
     .min(5, { message: "You must inform your driver's license." }),
   hasVehicle: z.boolean(),
 })
-type SignUpFormSchema = z.infer<typeof signUpDelivererSchema>
+export type SignUpDelivererFormSchemaType = z.infer<
+  typeof signUpDelivererSchema
+>
 
 export function SignUpDelivererForm() {
+  const [pending, setPending] = useState(false)
   const { initialInfo, finishedInitialStep } = useAuthStore()
 
   if (!finishedInitialStep) redirect('/auth/sign-up')
@@ -57,7 +62,7 @@ export function SignUpDelivererForm() {
     register,
     handleSubmit,
     setValue,
-  } = useForm<SignUpFormSchema>({
+  } = useForm<SignUpDelivererFormSchemaType>({
     resolver: zodResolver(signUpDelivererSchema),
     defaultValues: {
       address: '',
@@ -74,8 +79,30 @@ export function SignUpDelivererForm() {
   const [hasVehicle, setHasVehicle] = useState(false)
   const phoneRef = useRef<HTMLInputElement | null>(null)
 
-  const onSubmit = (data: SignUpFormSchema) => {
-    console.log(data)
+  const onSubmit = async (data: SignUpDelivererFormSchemaType) => {
+    setPending(true)
+
+    const state = await signUpDeliverer({
+      address: data.address,
+      birthdate: data.birthdate,
+      city: data.city,
+      country: data.country,
+      driverLicense: data.driverLicense,
+      hasVehicle: data.hasVehicle,
+      email: initialInfo.email,
+      name: initialInfo.name,
+      password: initialInfo.password,
+      phone: data.phone,
+    })
+
+    if (state.success === true) {
+      toast.success('You have successfully signed up!')
+      redirect('/auth/sign-in')
+    } else {
+      toast.error(state.message)
+    }
+
+    setPending(false)
   }
 
   const handleHasOwnVehicle = (has: boolean) => {
@@ -99,7 +126,7 @@ export function SignUpDelivererForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-10 flex w-full flex-col gap-4 px-4"
+      className="mt-10 flex w-full flex-col gap-10 px-1 lg:px-4"
     >
       <div className="flex flex-col gap-4">
         <h2 className="font-semibold">1. Address information</h2>
@@ -126,7 +153,7 @@ export function SignUpDelivererForm() {
           )}
         </div>
 
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-col items-start gap-4 lg:flex-row">
           <div className="flex w-full flex-col gap-2">
             <Label htmlFor="city">City</Label>
             <div className="relative">
@@ -148,14 +175,14 @@ export function SignUpDelivererForm() {
           </div>
 
           <div className="flex w-full flex-col gap-2">
-            <Label htmlFor="city">Address</Label>
+            <Label htmlFor="address">Address</Label>
             <div className="relative">
               <Building2Icon className="absolute left-2 top-1/2 size-4 -translate-y-1/2 text-theme-green/60" />
               <Input
                 className="pl-7"
-                id="city"
+                id="address"
                 placeholder="Type in your full address."
-                {...register('city')}
+                {...register('address')}
               />
             </div>
 
@@ -186,7 +213,7 @@ export function SignUpDelivererForm() {
           </span>
         )}
 
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-col items-center gap-4 lg:flex-row">
           <div className="flex w-full flex-col gap-2">
             <Label htmlFor="birthday">Your birthday</Label>
             <div className="relative">
@@ -238,7 +265,7 @@ export function SignUpDelivererForm() {
 
         <div className="flex w-full flex-col gap-2">
           <Label htmlFor="driverLicense">Do you own a vehicle?</Label>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
             <button
               type="button"
               onClick={() => handleHasOwnVehicle(false)}
@@ -247,8 +274,8 @@ export function SignUpDelivererForm() {
                 !hasVehicle && 'bg-theme-green/10 outline outline-theme-green',
               )}
             >
-              <PersonStanding className="size-4 text-theme-green" />I don&apos;t
-              have my own vehicle
+              <PersonStanding className="size-4 shrink-0 text-theme-green" />I
+              don&apos;t have my own vehicle
             </button>
             <button
               type="button"
@@ -258,8 +285,8 @@ export function SignUpDelivererForm() {
                 hasVehicle && 'bg-theme-green/10 outline outline-theme-green',
               )}
             >
-              <CarIcon className="size-4 text-theme-green" />I have my own
-              vehicle
+              <CarIcon className="size-4 shrink-0 text-theme-green" />I have my
+              own vehicle
             </button>
           </div>
         </div>
@@ -267,7 +294,7 @@ export function SignUpDelivererForm() {
 
       <Button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || pending}
         className="mt-2 rounded-xl bg-theme-green font-bold text-theme-light"
       >
         Submit

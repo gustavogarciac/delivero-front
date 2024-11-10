@@ -6,14 +6,14 @@ interface AuthStore {
   initialInfo: {
     name: string
     email: string
-    password: string | null
+    password: string
     picture?: string | null
     role: string
   }
   setInitialInfo: (initialInfo: {
     name: string
     email: string
-    password: string | null
+    password: string
     picture?: string | null
     role: string
   }) => void

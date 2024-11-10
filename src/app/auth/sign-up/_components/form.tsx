@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -87,7 +87,7 @@ export function SignUpForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-10 flex w-full flex-col gap-4 px-4"
+      className="mt-10 flex w-full flex-col gap-4 px-2 lg:px-4"
     >
       <div className="flex flex-col gap-2">
         <Label htmlFor="name">Name</Label>
@@ -176,41 +176,41 @@ export function SignUpForm() {
           Which role do you identify yourself as?
         </Label>
 
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">
           <button
             type="button"
             onClick={() => handleRoleChange('deliverer')}
             className={cn(
-              'flex min-h-16 flex-row items-center justify-center gap-2 rounded-xl border border-border/20 bg-zinc-100 px-3 py-2 hover:outline hover:outline-theme-green',
+              'flex min-h-8 flex-row items-center justify-center gap-2 rounded-xl border border-border/20 bg-zinc-100 px-3 py-2 text-sm hover:outline hover:outline-theme-green lg:min-h-16',
               role === 'deliverer' &&
                 'bg-theme-green/10 outline outline-theme-green',
             )}
           >
-            <BoxIcon className="size-6 text-theme-green" />
+            <BoxIcon className="size-4 shrink-0 text-theme-green" />
             Deliverer
           </button>
           <button
             type="button"
             onClick={() => handleRoleChange('recipient')}
             className={cn(
-              'flex min-h-16 flex-row items-center justify-center gap-2 rounded-xl border border-border/20 bg-zinc-100 px-3 py-2 hover:outline hover:outline-theme-green',
+              'flex min-h-8 flex-row items-center justify-center gap-2 rounded-xl border border-border/20 bg-zinc-100 px-3 py-2 text-sm hover:outline hover:outline-theme-green lg:min-h-16',
               role === 'recipient' &&
                 'bg-theme-green/10 outline outline-theme-green',
             )}
           >
-            <Users2Icon className="size-6 text-theme-green" />
+            <Users2Icon className="size-4 shrink-0 text-theme-green" />
             Recipient
           </button>
           <button
             type="button"
             onClick={() => handleRoleChange('manager')}
             className={cn(
-              'flex min-h-16 flex-row items-center justify-center gap-2 rounded-xl border border-border/20 bg-zinc-100 px-3 py-2 hover:outline hover:outline-theme-green',
+              'flex min-h-8 flex-row items-center justify-center gap-2 rounded-xl border border-border/20 bg-zinc-100 px-3 py-2 text-sm hover:outline hover:outline-theme-green lg:min-h-16',
               role === 'manager' &&
                 'bg-theme-green/10 outline outline-theme-green',
             )}
           >
-            <ShieldIcon className="size-6 text-theme-green" />
+            <ShieldIcon className="size-4 shrink-0 text-theme-green" />
             Manager
           </button>
         </div>
@@ -243,6 +243,7 @@ export function SignUpForm() {
         <Button
           variant={'ghost'}
           type="button"
+          onClick={() => redirect('http://localhost:3333/auth/google')}
           className="border border-border/40 bg-zinc-100 hover:bg-zinc-50 hover:outline"
         >
           <Image

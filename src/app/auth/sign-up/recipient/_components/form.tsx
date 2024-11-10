@@ -72,7 +72,10 @@ export function SignUpRecipientForm() {
   const phoneRef = useRef<HTMLInputElement | null>(null)
 
   const onSubmit = (data: SignUpFormSchema) => {
-    console.log(data)
+    console.log({
+      ...data,
+      ...initialInfo,
+    })
   }
 
   useEffect(() => {
@@ -91,7 +94,7 @@ export function SignUpRecipientForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-10 flex w-full flex-col gap-4 px-4"
+      className="mt-10 flex w-full flex-col gap-4 px-2 lg:px-4"
     >
       <div className="flex flex-col gap-4">
         <h2 className="font-semibold">Identification and address</h2>
@@ -137,7 +140,7 @@ export function SignUpRecipientForm() {
           )}
         </div>
 
-        <div className="flex flex-row items-center gap-4">
+        <div className="flex flex-col items-center gap-4 lg:flex-row">
           <div className="flex w-full flex-col gap-2">
             <Label htmlFor="city">City</Label>
             <div className="relative">
@@ -199,7 +202,7 @@ export function SignUpRecipientForm() {
           )}
         </div>
 
-        <div className="flex flex-row items-start gap-4">
+        <div className="flex flex-col items-start gap-4 lg:flex-row">
           <div className="flex w-full flex-col gap-2">
             <Label htmlFor="birthDate">Your birthday</Label>
             <div className="relative">

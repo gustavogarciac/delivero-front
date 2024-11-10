@@ -4,7 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { LockIcon, MailIcon, TriangleAlert } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -13,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { signIn } from '@/http/sign-in'
 
 const signInSchema = z.object({
   email: z.string().email({ message: 'Invalid email address.' }),
@@ -22,9 +24,13 @@ const signInSchema = z.object({
   rememberMe: z.boolean().optional(),
 })
 
-type SignInFormSchema = z.infer<typeof signInSchema>
+export type SignInFormSchema = z.infer<typeof signInSchema>
 
 export function SignInForm() {
+  const [pending, setPending] = useState(false)
+
+  const router = useRouter()
+
   const {
     formState: { isSubmitting, errors },
     register,
@@ -39,18 +45,25 @@ export function SignInForm() {
     },
   })
 
-  const onSubmit = (data: SignInFormSchema) => {
-    toast("You're signed in!", {
-      description: 'Welcome back!',
-      richColors: true,
-    })
-    console.log(data)
+  const onSubmit = async (data: SignInFormSchema) => {
+    setPending(true)
+
+    const state = await signIn(data)
+
+    if (state.success === true) {
+      toast.success('You have successfully signed in.')
+      router.push('/')
+    } else {
+      toast.error(state.message)
+    }
+
+    setPending(false)
   }
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-10 flex w-full flex-col gap-4 px-4"
+      className="mt-10 flex w-full flex-col gap-4 px-2 lg:px-4"
     >
       <div className="flex flex-col gap-2">
         <Label htmlFor="email">E-mail</Label>
@@ -95,7 +108,7 @@ export function SignInForm() {
 
       <Button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || pending}
         className="mt-2 rounded-xl bg-theme-green font-bold text-theme-light"
       >
         Sign in

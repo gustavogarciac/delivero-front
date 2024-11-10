@@ -145,6 +145,7 @@ export function SignUpWithGoogleForm() {
             className="pl-7"
             id="email"
             placeholder="Your email..."
+            disabled
             {...register('email')}
           />
         </div>
