@@ -49,7 +49,7 @@ export type SignUpDelivererFormSchemaType = z.infer<
 
 export function SignUpDelivererForm() {
   const [pending, setPending] = useState(false)
-  const { initialInfo, finishedInitialStep } = useAuthStore()
+  const { initialInfo, finishedInitialStep, setDelivererInfo } = useAuthStore()
 
   if (!finishedInitialStep) redirect('/auth/sign-up')
 
@@ -96,8 +96,9 @@ export function SignUpDelivererForm() {
     })
 
     if (state.success === true) {
+      setDelivererInfo(data)
       toast.success('You have successfully signed up!')
-      redirect('/auth/sign-in')
+      redirect('/auth/sign-up/deliverer/success')
     } else {
       toast.error(state.message)
     }

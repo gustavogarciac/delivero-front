@@ -17,6 +17,22 @@ interface AuthStore {
     picture?: string | null
     role: string
   }) => void
+  delivererInfo: {
+    address: string
+    phone: string
+    city: string
+    birthdate: Date
+    driverLicense: string
+    hasVehicle: boolean
+  }
+  setDelivererInfo: (delivererInfo: {
+    address: string
+    phone: string
+    city: string
+    birthdate: Date
+    driverLicense: string
+    hasVehicle: boolean
+  }) => void
 }
 
 export const useAuthStore = create<AuthStore>((set) => {
@@ -32,5 +48,14 @@ export const useAuthStore = create<AuthStore>((set) => {
       role: 'deliverer',
     },
     setInitialInfo: (initialInfo) => set({ initialInfo }),
+    delivererInfo: {
+      address: '',
+      phone: '',
+      city: '',
+      birthdate: new Date(),
+      driverLicense: '',
+      hasVehicle: false,
+    },
+    setDelivererInfo: (delivererInfo) => set({ delivererInfo }),
   }
 })
